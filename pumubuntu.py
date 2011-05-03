@@ -8,6 +8,27 @@ import pynotify
 class OptionsWindow(gtk.Window):
 	def __init__(self):
 		gtk.Window.__init__(self)
+		self.set_title("Pumubuntu")
+		self.main_box = gtk.VBox()
+		self.box1 = gtk.HBox()
+		self.label1 = gtk.Label("Work time (in minutes):")
+		self.entry1 = gtk.Entry()
+		self.box1.add(self.label1)
+		self.box1.add(self.entry1)
+		self.main_box.add(self.box1)
+		self.box2 = gtk.HBox()
+		self.label2 = gtk.Label("Short break time (in minutes):")
+		self.entry2 = gtk.Entry()
+		self.box2.add(self.label2)
+		self.box2.add(self.entry2)
+		self.main_box.add(self.box2)
+		self.box3 = gtk.HBox()
+		self.label3 = gtk.Label("Long break time (in minutes):")
+		self.entry3 = gtk.Entry()
+		self.box3.add(self.label3)
+		self.box3.add(self.entry3)
+		self.main_box.add(self.box3)
+		self.add(self.main_box)
 
 def menu_event(menu_item, event):
 	if(event == "exit"):
