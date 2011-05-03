@@ -5,9 +5,15 @@ import gtk
 import appindicator
 import pynotify
 
+class OptionsWindow(gtk.Window):
+	def __init__(self):
+		gtk.Window.__init__(self)
+
 def menu_event(menu_item, event):
 	if(event == "exit"):
 		gtk.main_quit()
+	if(event == "options"):
+		OptionsWindow().show_all()
 
 if __name__ == "__main__":
 	if not(pynotify.init("Pumubuntu")):
