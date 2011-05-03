@@ -28,7 +28,22 @@ class OptionsWindow(gtk.Window):
 		self.box3.add(self.label3)
 		self.box3.add(self.entry3)
 		self.main_box.add(self.box3)
+		self.box4 = gtk.HBox()
+		self.button1 = gtk.Button(stock=gtk.STOCK_SAVE)
+		self.button1.connect("clicked", self.options_event, "save")
+		self.button2 = gtk.Button(stock=gtk.STOCK_QUIT)
+		self.button2.connect("clicked", self.options_event, "quit")
+		self.box4.add(self.button1)
+		self.box4.add(self.button2)
+		self.main_box.add(self.box4)
 		self.add(self.main_box)
+
+	def options_event(self, button, event):
+		if(event == "save"):
+			print "Save data..."
+		if(event == "quit"):
+			self.destroy()
+
 
 def menu_event(menu_item, event):
 	if(event == "exit"):
@@ -56,4 +71,8 @@ if __name__ == "__main__":
 	menu_item.show()
 	menu.append(menu_item)
 	ind.set_menu(menu)
-	gtk.main()
+	try:
+		gtk.main()
+	except KeyboardInterrupt:
+		print("")
+		exit()
