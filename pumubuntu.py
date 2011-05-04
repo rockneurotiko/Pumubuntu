@@ -13,6 +13,9 @@ class Preferences():
 		self.KEY_WORK_TIME = "WT"
 		self.KEY_LONG_BREAK_TIME = "LT"
 		self.KEY_SHORT_BREAK_TIME = "ST"
+		self.DEFAULT_WORK_TIME = 25
+		self.DEFAULT_LONG_BREAK_TIME = 15
+		self.DEFAULT_SHORT_BREAK_TIME = 5
 
 	def save_preferences(self, work_time, short_break_time, long_break_time):
 		obj = {self.KEY_WORK_TIME: work_time, self.KEY_SHORT_BREAK_TIME: short_break_time, self.KEY_LONG_BREAK_TIME: long_break_time}
@@ -21,26 +24,57 @@ class Preferences():
 		file.write(dump)
 		file.close()
 
+	def get_work_time(self):
+		try:
+			file = open(PREFERENCES_FILENAME, "r")
+			dump = json.loads(file.read())
+			file.close()
+			return dump[self.KEY_WORK_TIME]
+		except IOError:
+			return self.DEFAULT_WORK_TIME
+
+	def get_long_break_time(self):
+		try:
+			file = open(PREFERENCES_FILENAME, "r")
+			dump = json.loads(file.read())
+			file.close()
+			return dump[self.KEY_LONG_BREAK_TIME]
+		except IOError:
+			return self.DEFAULT_LONG_BREAK_TIME
+
+	def get_short_break_time(self):
+		try:
+			file = open(PREFERENCES_FILENAME, "r")
+			dump = json.loads(file.read())
+			file.close()
+			return dump[self.KEY_SHORT_BREAK_TIME]
+		except IOError:
+			return self.DEFAULT_SHORT_BREAK_TIME
+
 class OptionsWindow(gtk.Window):
 	def __init__(self):
 		gtk.Window.__init__(self)
 		self.set_title("Pumubuntu")
+		self.prefs = Preferences()
 		self.main_box = gtk.VBox()
 		self.box1 = gtk.HBox()
 		self.label1 = gtk.Label("Work time (in minutes):")
 		self.entry1 = gtk.Entry()
+		self.entry1.set_text(str(self.prefs.get_work_time()))
 		self.box1.add(self.label1)
 		self.box1.add(self.entry1)
 		self.main_box.add(self.box1)
 		self.box2 = gtk.HBox()
 		self.label2 = gtk.Label("Short break time (in minutes):")
 		self.entry2 = gtk.Entry()
+		self.entry2.set_text(str(self.prefs.get_long_break_time()))
 		self.box2.add(self.label2)
 		self.box2.add(self.entry2)
 		self.main_box.add(self.box2)
 		self.box3 = gtk.HBox()
 		self.label3 = gtk.Label("Long break time (in minutes):")
 		self.entry3 = gtk.Entry()
+		self.entry3.set_text(str(self.prefs.get_short_break_time()))
 		self.box3.add(self.label3)
 		self.box3.add(self.entry3)
 		self.main_box.add(self.box3)
@@ -51,7 +85,7 @@ class OptionsWindow(gtk.Window):
 		self.button2.connect("clicked", self.options_event, "quit")
 		self.box4.add(self.button1)
 		self.box4.add(self.button2)
-		self.main_box.add(self.box4)
+		self.main_box.add(self.box4) # TODO: Add a restore values buttom...
 		self.add(self.main_box)
 
 	def options_event(self, button, event):
@@ -59,9 +93,9 @@ class OptionsWindow(gtk.Window):
 			if(self.entry1.get_text() != "" and self.entry2.get_text() != "" and self.entry3.get_text() != ""):
 				try:
 					values = map(int, [ self.entry1.get_text(), self.entry2.get_text(), self.entry3.get_text()])
-					Preferences().save_preferences(values[0], values[1], values[2])
+					self.prefs.save_preferences(values[0], values[1], values[2])
 				except ValueError:
-					print("Please only numbers!")
+					print("Please only numbers!") # TODO: Show a dialog...
 		if(event == "quit"):
 			self.destroy()
 
