@@ -4,6 +4,22 @@ import gobject
 import gtk
 import appindicator
 import pynotify
+import json
+
+PREFERENCES_FILENAME = "prefs.json"
+
+class Preferences():
+	def __init__(self):
+		self.KEY_WORK_TIME = "WT"
+		self.KEY_LONG_BREAK_TIME = "LT"
+		self.KEY_SHORT_BREAK_TIME = "ST"
+
+	def save_preferences(self, work_time, short_break_time, long_break_time):
+		obj = {self.KEY_WORK_TIME: work_time, self.KEY_SHORT_BREAK_TIME: short_break_time, self.KEY_LONG_BREAK_TIME: long_break_time}
+		dump = json.dumps(obj)
+		file = open(PREFERENCES_FILENAME, "w")
+		file.write(dump)
+		file.close()
 
 class OptionsWindow(gtk.Window):
 	def __init__(self):
@@ -40,7 +56,12 @@ class OptionsWindow(gtk.Window):
 
 	def options_event(self, button, event):
 		if(event == "save"):
-			print "Save data..."
+			if(self.entry1.get_text() != "" and self.entry2.get_text() != "" and self.entry3.get_text() != ""):
+				try:
+					values = map(int, [ self.entry1.get_text(), self.entry2.get_text(), self.entry3.get_text()])
+					Preferences().save_preferences(values[0], values[1], values[2])
+				except ValueError:
+					print("Please only numbers!")
 		if(event == "quit"):
 			self.destroy()
 
