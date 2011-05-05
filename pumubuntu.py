@@ -5,8 +5,23 @@ import gtk
 import appindicator
 import pynotify
 import json
+import time
 
 PREFERENCES_FILENAME = "prefs.json"
+
+class Timer():
+	def __init__(self, minutes):
+		self.keep_running = True
+		self.minutes = minutes
+		self.seconds = 0
+		while(not(self.minutes==0 and self.seconds==0) and self.keep_running):
+			time.sleep(1)
+			print("Timer: "+str(self.minutes)+":"+str(self.seconds))
+			if(self.seconds == 0):
+				self.seconds = 60
+				self.minutes -= 1
+			self.seconds -= 1
+		print("Timer: finished...")
 
 class Preferences():
 	def __init__(self):
@@ -129,6 +144,9 @@ if __name__ == "__main__":
 	menu_item.show()
 	menu.append(menu_item)
 	ind.set_menu(menu)
+
+	Timer(2)
+
 	try:
 		gtk.main()
 	except KeyboardInterrupt:
