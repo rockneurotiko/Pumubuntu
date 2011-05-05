@@ -95,7 +95,10 @@ class OptionsWindow(gtk.Window):
 					values = map(int, [ self.entry1.get_text(), self.entry2.get_text(), self.entry3.get_text()])
 					self.prefs.save_preferences(values[0], values[1], values[2])
 				except ValueError:
-					print("Please only numbers!") # TODO: Show a dialog...
+					dialog = gtk.MessageDialog(None, gtk.DIALOG_MODAL, gtk.MESSAGE_INFO, gtk.BUTTONS_NONE, "Please, just use entire numbers.")
+					dialog.add_button(gtk.STOCK_CLOSE, gtk.RESPONSE_CLOSE)
+					dialog.run()
+					dialog.destroy()
 		if(event == "quit"):
 			self.destroy()
 
