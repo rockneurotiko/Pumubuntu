@@ -54,7 +54,7 @@ class Preferences():
 class OptionsWindow(gtk.Window):
 	def __init__(self):
 		gtk.Window.__init__(self)
-		self.set_title("Pumubuntu")
+		self.set_title("Pumubuntu") # TODO: Set an icon for this window...
 		self.prefs = Preferences()
 		self.main_box = gtk.VBox()
 		self.box1 = gtk.HBox()
@@ -114,9 +114,9 @@ if __name__ == "__main__":
 		prit("[!] Error: Could not load pynotify...")
 		exit()
 	# Set an app indicator in system tray...
-	ind = appindicator.Indicator("Pumubuntu", "indicator-messages", appindicator.CATEGORY_APPLICATION_STATUS)
+	ind = appindicator.Indicator("Pumubuntu", "indicator-messages", appindicator.CATEGORY_APPLICATION_STATUS) # TODO: Need an icon...
 	ind.set_status (appindicator.STATUS_ACTIVE)
-	ind.set_attention_icon("indicator-messages")
+	ind.set_attention_icon("indicator-messages") # TODO: Also need an icon...
 
 	# Indicator menu...
 	menu = gtk.Menu()
