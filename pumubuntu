@@ -164,11 +164,8 @@ if __name__ == "__main__":
 	menu.append(menu_item)
 	ind.set_menu(menu)
 
-	t = Timer(2)
-
 	try:
 		gtk.main()
 	except KeyboardInterrupt:
 		print("")
 	exit()
-	t.cancel()
