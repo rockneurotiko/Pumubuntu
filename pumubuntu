@@ -11,8 +11,8 @@ import threading
 PREFERENCES_FILENAME = "prefs.json"
 
 class Timer():
-	def __init__(self, minutes):
-		self.thread = self.CountingThread( minutes)
+	def __init__(self, minutes, text_label):
+		self.thread = self.CountingThread(minutes, text_label)
 		self.thread.daemon=True
 		self.thread.start()
 		self.keep_running = True
@@ -21,9 +21,10 @@ class Timer():
 		self.thread.cancel()
 
 	class CountingThread(threading.Thread):
-		def __init__(self, minutes):
+		def __init__(self, minutes, text_label):
 			threading.Thread.__init__(self)
 			self.minutes = minutes
+			self.text_label = text_label
 			self.keep_running = True
 
 		def cancel(self):
@@ -33,12 +34,13 @@ class Timer():
 			self.seconds = 0
 			while(not(self.minutes==0 and self.seconds==0) and self.keep_running):
 				time.sleep(1)
-				print("Timer: "+str(self.minutes)+":"+str(self.seconds))
+				self.text_label.set_text(str(self.minutes)+":"+str(self.seconds))
 				if(self.seconds == 0):
 					self.seconds = 60
 					self.minutes -= 1
 				self.seconds -= 1
-			print("Timer: finished...")
+			self.text_label.set_text("00:00")
+			print("Timer: finished...")	# Play a sound!
 
 class Preferences():
 	def __init__(self):
@@ -154,6 +156,14 @@ if __name__ == "__main__":
 
 	# Indicator menu...
 	menu = gtk.Menu()
+	label_time = gtk.Label("00:00")
+	menu_item = gtk.MenuItem()
+	menu_item.add(label_time)
+	menu_item.connect("activate", menu_event, "play_pause")
+	menu_item.show()
+	menu.append(menu_item)
+
+
 	menu_item = gtk.ImageMenuItem(gtk.STOCK_PREFERENCES)
 	menu_item.connect("activate", menu_event, "options")
 	menu_item.show()
@@ -163,6 +173,8 @@ if __name__ == "__main__":
 	menu_item.show()
 	menu.append(menu_item)
 	ind.set_menu(menu)
+
+	Timer(2, label_time)
 
 	try:
 		gtk.main()
