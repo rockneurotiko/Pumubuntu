@@ -268,6 +268,13 @@ class OptionsWindow(gtk.Window):
 
 
 if __name__ == "__main__":
+	# Ubuntu fix for hearing sound...
+	if(platform.system() == "Linux" and len(sys.argv) == 1):
+		(distname, ver, id) = platform.linux_distribution()
+		if(distname == "Ubuntu"):
+			os.system("padsp "+sys.argv[0]+" -padsp &")
+			exit()
+
 	if not(pynotify.init("Pumubuntu")):
 		prit("[!] Error: Could not load pynotify...")
 		exit()
