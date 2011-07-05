@@ -13,13 +13,8 @@ Click on the flag to display the options:
 RUNNING AT STARTUP:
 To add the applet to your bar on each log in, open Startup Applications (Ubuntu) and add a new item like this:
 Name: Pumubuntu
-Command: padsp /home/<user>/<PumubuntuDir>/pomodoro.py
+Command: /<PumubuntuDir>/pumubuntu
 Comment: Pomodoro Timer
-
-It's important to add the full path, the program won't start if you use a shortcut.
-ie.: Using a shortcut like "~/Pumubuntu/pomodoro.py" is NOT valid and the applet won't start. So, if you have problems to start the app, you should start by checking that you added the full path.
-
-Note: "padsp" is not needed in older Ubuntu versions. But it is needed if you are using Ubuntu 11.04
 
 
 PROJECT MAINTAINERS:
