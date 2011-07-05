@@ -1,2 +1,2 @@
 #!/bin/sh
-padsp ./pomodoro.py
+padsp ./pumubuntu.py
