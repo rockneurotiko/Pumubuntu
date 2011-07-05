@@ -11,6 +11,7 @@ import platform
 import os
 import threading
 import sys
+import argparse
 
 
 
@@ -264,11 +265,16 @@ class OptionsWindow(gtk.Window):
 
 
 if __name__ == "__main__":
+	parser = argparse.ArgumentParser(prog='pumubuntu')
+	parser.add_argument('--nopadsp', action="store_true", dest='nopadsp', help='Don\'t try to fix Ubuntu sound using padsp')
+	options = parser.parse_args()
+
 	# Ubuntu fix for hearing sound...
-	if(platform.system() == "Linux" and len(sys.argv) == 1):
+	if(platform.system() == "Linux"):
 		(distname, ver, id) = platform.linux_distribution()
-		if(distname == "Ubuntu"):
-			os.system("padsp "+resources_dir + "/" + script_name +" -padsp &")
+		if(distname == "Ubuntu" and (not options.nopadsp)):
+			# restart ourselves using padsp
+			os.system("padsp "+resources_dir + "/" + script_name +" --nopadsp &")
 			exit()
 
 	if not(pynotify.init("Pumubuntu")):

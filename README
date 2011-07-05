@@ -10,6 +10,10 @@ Click on the flag to display the options:
 * Click on the timer to start/stop a Pomodoro cycle. Remember, if you stop a Pomodoro it will start from 0! If a Pomodoro Begins, It Has to Ring!!!
 * Click on preferences if you want to change Pomodoros/breaks/pauses length.
 
+IMPORTANT: Remember to add the indicator to the whitelist!
+dconf-editor
+desktop -> unity -> panel
+Add 'pumubuntu' to the list.
 
 RUNNING AT STARTUP:
 To add the applet to your bar on each log in, open Startup Applications (Ubuntu) and add a new item like this:
