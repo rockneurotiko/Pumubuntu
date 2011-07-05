@@ -16,6 +16,8 @@ import sys
 
 #resources_dir = os.getcwd()
 resources_dir = os.path.abspath(os.path.dirname(sys.argv[0]))
+script_name = os.path.basename(sys.argv[0])
+
 PREFERENCES_FILENAME = resources_dir + "prefs.json"
 class Status():
     def __init__(self, notification_icon):
@@ -116,12 +118,10 @@ class Timer():
 		return self.thread.status.isRunning()
 
 	def stop(self):
-		print("Timer: stopped outside thread" + str(self.isRunning()))
 		self.thread.event.clear() # pause thread
 		self.thread.stop() # reset pomodoro
 
 	def start(self):
-		print("Timer: started outside thread" + str(self.isRunning()))
 		self.thread.nextStage() # start new pomodoro (we were reset by the stop method. remember?)
 		self.thread.event.set()  #run thread
 
@@ -135,17 +135,13 @@ class Timer():
 
 		def stop(self):
 			self.status.stop()
-			print("CountingThread: stopped" + str(self.status.isRunning()))
 
 		def nextStage(self):
 			self.status.next() # next status and Play a sound! :D
-			print("CountingThread: next stage" + str(self.status.isRunning()))
 
 		def run(self):
-			print("CountingThread: started...")
 			while (True): #this thread is not restarted
 				self.event.wait() # wait until we are allowed to run
-				print("CountingThread: allowed to run...")
 				if (self.status.isRunning()):
 					# maybe we were stopped, so we have to update our timer!
 					self.update_timer()
@@ -166,9 +162,9 @@ class Timer():
 		def switch_status(self):
 			if (self.status.isRunning()):
                         	self.nextStage()
-				print("CountingThread: finished..." + str(self.status.isRunning()))
-			else:
-				print("CountingThread: Pomodoro manually stopped. Status: " + str(self.status.isRunning()))
+			#	print("CountingThread: finished..." + str(self.status.isRunning()))
+			#else:
+			#	print("CountingThread: Pomodoro manually stopped. Status: " + str(self.status.isRunning()))
 
 class Preferences():
 	def __init__(self):
@@ -272,7 +268,7 @@ if __name__ == "__main__":
 	if(platform.system() == "Linux" and len(sys.argv) == 1):
 		(distname, ver, id) = platform.linux_distribution()
 		if(distname == "Ubuntu"):
-			os.system("padsp "+sys.argv[0]+" -padsp &")
+			os.system("padsp "+resources_dir + "/" + script_name +" -padsp &")
 			exit()
 
 	if not(pynotify.init("Pumubuntu")):
@@ -282,10 +278,10 @@ if __name__ == "__main__":
 	def menu_event(menu_item, event):
 		if(event == "play_pause"):
 			if (timer.isRunning()):
-				print("Menu: stopping thread" + str(timer.isRunning()))
+				
 				timer.stop()
 			else:
-				print("Menu: starting thread" + str(timer.isRunning()))
+				
 				timer.start()
 		if(event == "exit"):
 			gtk.main_quit()
