@@ -1,0 +1,19 @@
+Use run.sh to start the program. It will add a flag to the indicators:
+
+Blue flag: Pomodoro is freezed
+Red flag: Pomodoro in progress
+Yellow flag: Break time
+Green flag: Pause time! :D Time to get a coffee and relax
+
+Click on the flag to display the options:
+* Click on the timer to start/stop a Pomodoro cycle. Remember, if you stop a Pomodoro it will start from 0! If a Pomodoro Begins, It Has to Ring!!!
+* Click on preferences if you want to change Pomodoros/breaks/pauses length.
+
+
+Features:
+* Sound alerts from http://www.freesound.org/  (read Sounds.txt for more details)
+* Notification icons from http://openiconlibrary.sourceforge.net/
+
+Motivation:
+I was looking for a nice and compatible Pomodoro applet for Ubuntu, and then found Pumubuntu in Antonio Vazquez Blanco public git: https://github.com/antoniovazquezblanco (thanks Antonio!)
+It had a nice app skeleton which added a notification icon to the Ubuntu bar, and also had a timer implemented but, sadly, it wasn't working. It was more like a demo with a fixed time in the code, so I thought it would be good to finish the app and add the features I wanted.
