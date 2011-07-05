@@ -15,7 +15,8 @@ Features:
 * Notification icons from http://openiconlibrary.sourceforge.net/
 
 Motivation:
-I was looking for a nice and compatible Pomodoro applet for Ubuntu, and then found Pumubuntu in Antonio Vazquez Blanco public git: https://github.com/antoniovazquezblanco (thanks Antonio!)
+Emilio Moretti was looking for a nice and compatible Pomodoro applet for Ubuntu, and then found Pumubuntu in Antonio Vazquez Blanco public git: 
+https://github.com/antoniovazquezblanco (thanks Antonio!)
 It had a nice app skeleton which added a notification icon to the Ubuntu bar, and also had a timer implemented but, sadly, it wasn't working. It was more like a demo with a fixed time in the code, so I thought it would be good to finish the app and add the features I wanted.
 
 
