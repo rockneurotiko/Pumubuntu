@@ -10,10 +10,12 @@ import threading
 import platform
 import os
 import threading
+import sys
 
 
 
-resources_dir = os.getcwd()
+#resources_dir = os.getcwd()
+resources_dir = os.path.abspath(os.path.dirname(sys.argv[0]))
 PREFERENCES_FILENAME = resources_dir + "prefs.json"
 class Status():
     def __init__(self, notification_icon):
