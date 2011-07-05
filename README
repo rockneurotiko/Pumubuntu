@@ -17,3 +17,14 @@ Features:
 Motivation:
 I was looking for a nice and compatible Pomodoro applet for Ubuntu, and then found Pumubuntu in Antonio Vazquez Blanco public git: https://github.com/antoniovazquezblanco (thanks Antonio!)
 It had a nice app skeleton which added a notification icon to the Ubuntu bar, and also had a timer implemented but, sadly, it wasn't working. It was more like a demo with a fixed time in the code, so I thought it would be good to finish the app and add the features I wanted.
+
+
+* To add the applet to your bar on each log in, open Startup Applications (Ubuntu) and add a new item like this:
+Name: Pumubuntu
+Command: padsp /home/<user>/<PumubuntuDir>/pomodoro.py
+Comment: Pomodoro Timer
+
+It's important to add the full path, the program won't start if you use a shortcut.
+ie.: Using a shortcut like "~/Pumubuntu/pomodoro.py" is NOT valid and the applet won't start. So, if you have problems to start the app, you should start by checking that you added the full path.
+
+Note: "padsp" is not needed in older Ubuntu versions. But it is needed if you are using Ubuntu 11.04
