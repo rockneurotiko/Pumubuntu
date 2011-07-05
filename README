@@ -1,4 +1,5 @@
-Use run.sh to start the program. It will add a flag to the indicators:
+RUNNING:
+Use "pumubuntu" executable to start the program. It will add a flag to the indicators:
 
 Blue flag: Pomodoro is freezed
 Red flag: Pomodoro in progress
