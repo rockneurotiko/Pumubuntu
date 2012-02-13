@@ -9,7 +9,6 @@ import time
 import threading
 import platform
 import os
-import threading
 import sys
 import argparse
 
@@ -25,7 +24,7 @@ class Status():
         self.current_status = Status.STOP
         self.pomodoro_stage = 0
         self.indicator = notification_icon
-
+        
     def next(self):
         if (self.pomodoro_stage >= 4):
             self.current_status = Status.PAUSE
